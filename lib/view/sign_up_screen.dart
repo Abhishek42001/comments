@@ -26,6 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Future<void> handleSignupTap(AuthViewModel authViewModel) async {
     final bool isValid = _formKey.currentState?.validate() ?? false;
     if (isValid) {
+      FocusScope.of(context).unfocus();
       SignUpModel signUpModel = SignUpModel(
         email: _emailController.text,
         password: _passwordController.text,

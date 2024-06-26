@@ -25,6 +25,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Future<void> handleSignInTap(AuthViewModel authViewModel) async {
     final bool isValid = _formKey.currentState?.validate() ?? false;
     if (isValid) {
+      FocusScope.of(context).unfocus();
       SignInModel signInModel = SignInModel(
         email: _emailController.text,
         password: _passwordController.text,
