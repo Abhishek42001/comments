@@ -37,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         if (mounted) {
           Navigator.pushReplacementNamed(
             context,
-            AppRoutes().comment,
+            AppRoutes().signIn,
           );
         }
       }

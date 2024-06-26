@@ -19,6 +19,9 @@ class AuthViewModel with ChangeNotifier {
     if (response.userCredential != null) {
       AppToast.show('Sign up successful');
 
+      ///Hide loading indicator
+      isLoading = false;
+      notifyListeners();
       return true;
     } else {
       AppToast.show(response.error!);
@@ -39,6 +42,10 @@ class AuthViewModel with ChangeNotifier {
     SigningResponseModel? response = await _firebaseService.signIn(signupModel);
     if (response.userCredential != null) {
       AppToast.show('Sign up successful');
+
+      ///Hide loading indicator
+      isLoading = false;
+      notifyListeners();
       return true;
     } else {
       AppToast.show(response.error!);
