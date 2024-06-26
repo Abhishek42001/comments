@@ -1,6 +1,8 @@
 import 'package:comments/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
+///It contains all the textstyles
+///for the app
 class AppTextStyles {
   AppTextStyles._();
   static final AppTextStyles _instance = AppTextStyles._();

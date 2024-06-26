@@ -3,8 +3,8 @@ import 'package:comments/constants/app_colors.dart';
 import 'package:comments/constants/app_text_style.dart';
 import 'package:comments/models/comment_model.dart';
 import 'package:comments/viewModel/comments_view_model.dart';
-import 'package:comments/widgets/app_button.dart';
 import 'package:comments/widgets/comment/comment_item.dart';
+import 'package:comments/widgets/error_widget.dart';
 import 'package:comments/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,10 +21,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<CommentsViewModel>(
-      context,
-      listen: false,
-    ).getComments();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<CommentsViewModel>(
+        context,
+        listen: false,
+      ).getComments();
+    });
   }
 
   @override
@@ -56,36 +58,12 @@ class _CommentsScreenState extends State<CommentsScreen> {
               Consumer<CommentsViewModel>(
                 builder: (BuildContext context, value, Widget? child) {
                   List<CommentModel>? commentModelList = value.commentModelList;
-
                   return Expanded(
                     child: value.isLoading
                         ? const Loader()
                         : commentModelList == null
-                            ? Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  padding: WidgetConfig().pagePadding.copyWith(
-                                        top: 26,
-                                      ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Some Error occured",
-                                        style: AppTextStyles.txtStyle_20_700,
-                                      ),
-                                      Container(
-                                        margin: const EdgeInsets.only(top: 16),
-                                        child: AppButton(
-                                          'Refresh',
-                                          onTap: value.getComments,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
+                            ? AppErrorWidget(
+                                onRefreshTap: value.getComments,
                               )
                             : ListView.separated(
                                 padding: WidgetConfig().pagePadding.copyWith(

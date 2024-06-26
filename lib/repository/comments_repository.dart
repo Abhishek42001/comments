@@ -9,7 +9,11 @@ class CommentsRepository{
       Response response = await NetworkLayer().client.get(ApiEndpoints().comment);
       List<CommentModel> comments = (response.data as List).map((e) => CommentModel.fromJson(e)).toList();
       return comments;
-    }on Exception catch (_) {
+    } on DioException catch(e){
+      ///We can handle dio exception if we want
+      return null;
+    }
+    on Exception catch (_) {
       return null;
     }
   }

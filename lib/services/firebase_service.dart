@@ -1,7 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:comments/models/sign_in_model.dart';
 import 'package:comments/models/sign_up_model.dart';
 import 'package:comments/models/signing_response_model.dart';
-import 'package:comments/utils/app_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,18 @@ class FirebaseService {
         password: user.password,
       );
       await credential.user?.updateDisplayName(user.name);
-      AppToast.show('Sign up successful');
+      try {
+        CollectionReference users =
+            FirebaseFirestore.instance.collection('users');
+        await users.add(
+          {
+            'email': user.email,
+            'name': user.name,
+          },
+        );
+      } catch (e) {
+        ///Can be recorded to crashlytics
+      }
       response = SigningResponseModel(
         userCredential: credential,
         error: null,

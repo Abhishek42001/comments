@@ -1,3 +1,4 @@
+///All route names for app in navigation
 class AppRoutes{
   AppRoutes._();
   static final AppRoutes _instance = AppRoutes._();
