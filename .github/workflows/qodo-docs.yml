@@ -19,7 +19,6 @@ jobs:
           git clone https://github.com/qodo-ai/qodo-cover.git
           cd qodo-cover
           # Install dependencies for qodo-cover (if any)
-          pip install -r requirements.txt  # If qodo-cover has a requirements.txt
           pip install . # Install the qodo-cover package itself
 
           # Run the coverage tool.  Crucially, use python, not python3
