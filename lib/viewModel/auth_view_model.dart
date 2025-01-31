@@ -55,4 +55,8 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
     return false;
   }
+
+  int addNumbers(int a, int b){
+    return a+b;
+  }
 }
