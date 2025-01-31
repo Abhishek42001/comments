@@ -6,4 +6,7 @@ class ApiEndpoints {
   String baseUrl = 'https://jsonplaceholder.typicode.com';
   
   String comment = '/comments';
+
+  ///For swim testing
+  final String testing = 'testing';
 }
