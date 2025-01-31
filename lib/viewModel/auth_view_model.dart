@@ -56,7 +56,7 @@ class AuthViewModel with ChangeNotifier {
     return false;
   }
 
-  int addNumbers(int a, int b){
-    return a+b;
+  int subtractNumber(int a, int b){
+    return a-b;
   }
 }
