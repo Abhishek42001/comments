@@ -51,8 +51,9 @@ class AuthViewModel with ChangeNotifier {
       AppToast.show(response.error!);
     }
 
-    isLoading = false;
+    isLoading = false; 
     notifyListeners();
+    print("he");
     return false;
   }
 
