@@ -53,7 +53,6 @@ class AuthViewModel with ChangeNotifier {
 
     isLoading = false; 
     notifyListeners();
-    print("he");
     return false;
   }
 
