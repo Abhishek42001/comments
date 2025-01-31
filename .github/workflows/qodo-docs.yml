@@ -1,15 +1,10 @@
-name: Generate Documentation with Qodo AI
+name: Qodo Cover
 
-on:
-  pull_request:
-    branches:
-      - main  # Run this when a PR is created targeting the main branch
-  workflow_dispatch:  # Allows manual triggering of this workflow
+on: [push, pull_request]
 
 jobs:
-  generate-docs:
+  qodo-cover:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -19,16 +14,9 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Qodo CLI
-        run: pip install qodo-cli
-
-      - name: Run Qodo AI Documentation Generation
-        run: qodo docgen --all --style=google
-
-      - name: Commit and Push Changes
+      - name: Install Qodo Cover
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "🤖 Auto-generated documentation using Qodo AI" || echo "No changes to commit"
-          git push
+          git clone https://github.com/qodo-ai/qodo-cover.git
+          cd qodo-cover
+          pip python cover_agent/main.py --source your_source_directory --tests your_tests_directory
+
